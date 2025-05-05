@@ -1,35 +1,42 @@
-import { Ionicons } from '@expo/vector-icons';
-import * as DropdownMenu from 'zeego/dropdown-menu';
+import { Ionicons } from "@expo/vector-icons";
+import {
+	Root,
+	Trigger,
+	Content,
+	Item,
+	ItemTitle,
+	ItemIcon,
+} from "zeego/dropdown-menu";
 
 export type Props = {
-  items: Array<{
-    key: string;
-    title: string;
-    icon: string;
-  }>;
-  onSelect: (key: string) => void;
+	items: Array<{
+		key: string;
+		title: string;
+		icon: string;
+	}>;
+	onSelect: (key: string) => void;
 };
 
 const DropDownMenu = ({ items, onSelect }: Props) => {
-  return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger>
-        <Ionicons name="ellipsis-horizontal" size={24} color={'#fff'} />
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Content>
-        {items.map((item) => (
-          <DropdownMenu.Item key={item.key} onSelect={() => onSelect(item.key)}>
-            <DropdownMenu.ItemTitle>{item.title}</DropdownMenu.ItemTitle>
-            <DropdownMenu.ItemIcon
-              ios={{
-                name: item.icon,
-                pointSize: 18,
-              }}
-            />
-          </DropdownMenu.Item>
-        ))}
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
-  );
+	return (
+		<Root>
+			<Trigger>
+				<Ionicons name="ellipsis-horizontal" size={24} color={"#fff"} />
+			</Trigger>
+			<Content>
+				{items.map((item) => (
+					<Item key={item.key} onSelect={() => onSelect(item.key)}>
+						<ItemTitle>{item.title}</ItemTitle>
+						<ItemIcon
+							ios={{
+								name: item.icon,
+								pointSize: 18,
+							}}
+						/>
+					</Item>
+				))}
+			</Content>
+		</Root>
+	);
 };
 export default DropDownMenu;

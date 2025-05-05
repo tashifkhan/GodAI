@@ -12,7 +12,6 @@ import {
 	Platform,
 } from "react-native";
 import { useMMKVString } from "react-native-mmkv";
-import OpenAI from "react-native-openai";
 import { FlashList } from "@shopify/flash-list";
 import ChatMessage from "@/components/ChatMessage";
 import { Message, Role } from "@/utils/Interfaces";

@@ -1,7 +1,7 @@
 import Colors from "@/constants/Colors";
 import { defaultStyles } from "@/constants/Styles";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router"; // Import useRouter
+import { useRouter } from "expo-router";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -10,8 +10,8 @@ const BottomLoginSheet = () => {
 	const router = useRouter(); // Initialize router
 
 	const onGuestLogin = () => {
-		// Navigate to the main chat screen or desired authenticated route
-		router.replace("/(auth)/chat");
+		// Navigate to the new chat screen within the drawer
+		router.replace("/(auth)/(drawer)/(chat)/new"); //
 	};
 
 	return (
