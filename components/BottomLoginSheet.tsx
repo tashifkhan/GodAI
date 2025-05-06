@@ -7,7 +7,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const BottomLoginSheet = () => {
 	const { bottom } = useSafeAreaInsets();
-	const router = useRouter(); // Initialize router
+	const router = useRouter();
 
 	const onGuestLogin = () => {
 		// Navigate to the new chat screen within the drawer

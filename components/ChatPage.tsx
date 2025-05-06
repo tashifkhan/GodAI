@@ -17,7 +17,7 @@ import ChatMessage from "@/components/ChatMessage";
 import { Message, Role } from "@/utils/Interfaces";
 import MessageIdeas from "@/components/MessageIdeas";
 import { addChat, addMessage, getMessages } from "@/utils/Database";
-import { useSQLiteContext } from "expo-sqlite/next";
+import { useSQLiteContext } from "expo-sqlite";
 
 const ChatPage = () => {
 	const [godaiVersion, setGodaiVersion] = useMMKVString(
@@ -134,12 +134,9 @@ const ChatPage = () => {
 			/>
 			<View style={styles.page} onLayout={onLayout}>
 				{messages.length == 0 && (
-					<View style={[styles.logoContainer, { marginTop: height / 2 - 100 }]}>
-						<Image
-							source={require("@/assets/images/logo-white.png")}
-							style={styles.image}
-						/>
-					</View>
+					<View
+						style={[styles.logoContainer, { marginTop: height / 2 - 100 }]}
+					></View>
 				)}
 				<FlashList
 					data={messages}

@@ -1,8 +1,6 @@
 import { useFonts } from "expo-font";
 import { Slot, SplashScreen, Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
