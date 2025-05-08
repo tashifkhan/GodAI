@@ -11,12 +11,11 @@ const BottomLoginSheet = () => {
 
 	const onGuestLogin = () => {
 		// Navigate to the new chat screen within the drawer
-		router.replace("/(auth)/(drawer)/(chat)/new"); //
+		console.log("Guest Login Pressed");
 	};
 
 	return (
 		<View style={[styles.container, { paddingBottom: bottom }]}>
-			{/* Updated Guest Login button */}
 			<TouchableOpacity
 				style={[defaultStyles.btn, styles.btnLight]}
 				onPress={onGuestLogin} // Add onPress handler
@@ -24,12 +23,10 @@ const BottomLoginSheet = () => {
 				<Text style={styles.btnLightText}>Guest Login</Text>
 			</TouchableOpacity>
 
-			{/* Kept Sign up button styling, removed Link and navigation */}
 			<TouchableOpacity style={[defaultStyles.btn, styles.btnDark]}>
 				<Text style={styles.btnDarkText}>Sign up</Text>
 			</TouchableOpacity>
 
-			{/* Kept Log in button styling, removed Link and navigation */}
 			<TouchableOpacity style={[defaultStyles.btn, styles.btnOutline]}>
 				<Text style={styles.btnDarkText}>Log in</Text>
 			</TouchableOpacity>
