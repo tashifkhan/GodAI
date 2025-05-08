@@ -10,8 +10,8 @@ const BottomLoginSheet = () => {
 	const router = useRouter();
 
 	const onGuestLogin = () => {
-		// Navigate to the new chat screen within the drawer
-		console.log("Guest Login Pressed");
+		// Navigate to the new chat screen
+		router.push("/chat-screen");
 	};
 
 	return (

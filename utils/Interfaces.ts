@@ -3,11 +3,16 @@ export enum Role {
   Bot = 1,
 }
 
+export interface Source {
+  title: string;
+  url: string;
+}
+
 export interface Message {
-  role: Role;
   content: string;
-  imageUrl?: string;
-  prompt?: string;
+  role: Role;
+  timestamp: Date;
+  sources?: Source[];
 }
 
 export interface Chat {
