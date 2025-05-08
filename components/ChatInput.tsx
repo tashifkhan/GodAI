@@ -11,19 +11,21 @@ import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const HISTORY_STATE_KEY = "godai_history_enabled";
 
 interface ChatInputProps {
 	onSend: (message: string) => void;
+	isHistoryEnabled: boolean;
+	onHistoryToggle: (newState: boolean) => void;
 }
 
-const ChatInput: React.FC<ChatInputProps> = ({ onSend }) => {
+const ChatInput: React.FC<ChatInputProps> = ({
+	onSend,
+	isHistoryEnabled,
+	onHistoryToggle,
+}) => {
 	const [message, setMessage] = useState("");
 	const [isTyping, setIsTyping] = useState(false);
 	const [historyExpanded, setHistoryExpanded] = useState(false);
-	const [historyEnabled, setHistoryEnabled] = useState(false);
 	const insets = useSafeAreaInsets();
 
 	// Animation values
@@ -31,30 +33,9 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSend }) => {
 	const textOpacity = useRef(new Animated.Value(0)).current;
 	const globeOpacity = useRef(new Animated.Value(1)).current;
 
-	// Load saved history state on component mount
-	useEffect(() => {
-		const loadHistoryState = async () => {
-			try {
-				const savedState = await AsyncStorage.getItem(HISTORY_STATE_KEY);
-				if (savedState !== null) {
-					setHistoryEnabled(savedState === "true");
-				}
-			} catch (error) {
-				console.error("Failed to load history state:", error);
-			}
-		};
-
-		loadHistoryState();
-	}, []);
-
 	const toggleHistoryState = () => {
-		const newState = !historyEnabled;
-		setHistoryEnabled(newState);
-
-		// Save the state to AsyncStorage
-		AsyncStorage.setItem(HISTORY_STATE_KEY, String(newState)).catch((error) =>
-			console.error("Failed to save history state:", error)
-		);
+		const newState = !isHistoryEnabled;
+		onHistoryToggle(newState);
 
 		// After toggling, collapse the button
 		collapseHistoryButton();
@@ -180,7 +161,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSend }) => {
 						style={[
 							styles.historyButton,
 							{ width: expandWidth },
-							historyEnabled ? styles.historyEnabled : styles.historyDisabled,
+							isHistoryEnabled ? styles.historyEnabled : styles.historyDisabled,
 						]}
 					>
 						<TouchableOpacity
@@ -194,13 +175,13 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSend }) => {
 								<Ionicons
 									name="globe-outline"
 									size={22}
-									color={historyEnabled ? "#1DB954" : "#FF5959"}
+									color={isHistoryEnabled ? "#1DB954" : "#FF5959"}
 								/>
 							</Animated.View>
 							<Animated.Text
 								style={[styles.historyText, { opacity: textOpacity }]}
 							>
-								{historyEnabled ? "Disable History" : "Enable History"}
+								{isHistoryEnabled ? "Disable History" : "Enable History"}
 							</Animated.Text>
 						</TouchableOpacity>
 					</Animated.View>
