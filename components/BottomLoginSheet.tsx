@@ -18,7 +18,7 @@ const BottomLoginSheet = () => {
 		<View style={[styles.container, { paddingBottom: bottom }]}>
 			<TouchableOpacity
 				style={[defaultStyles.btn, styles.btnLight]}
-				onPress={onGuestLogin} // Add onPress handler
+				onPress={onGuestLogin}
 			>
 				<Text style={styles.btnLightText}>Guest Login</Text>
 			</TouchableOpacity>

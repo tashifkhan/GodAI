@@ -1,6 +1,6 @@
 import Colors from "@/constants/Colors";
 import { memo, useEffect } from "react";
-import { StyleSheet, useWindowDimensions } from "react-native";
+import { StyleSheet, useWindowDimensions, Platform } from "react-native";
 import Animated, {
 	interpolate,
 	interpolateColor,
@@ -138,9 +138,7 @@ const AnimatedIntro = () => {
 		return content[index].title;
 	}, [currentIndex]);
 
-	// Add useEffect to trigger initial animation
 	useEffect(() => {
-		// Start the animation automatically when component mounts
 		if (labelWidth.value > 0) {
 			currentX.value = withDelay(
 				333,
@@ -246,12 +244,13 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		position: "absolute",
 		left: "0%",
+		top: Platform.OS === "android" ? 12 : 0,
 	},
 	titleText: {
 		flexDirection: "row",
 	},
 	title: {
-		fontSize: 36,
+		fontSize: Platform.OS === "android" ? 32 : 36,
 		fontWeight: "600",
 		left: "0%",
 		position: "absolute",

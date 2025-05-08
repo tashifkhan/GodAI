@@ -1,15 +1,15 @@
 import { useFonts } from "expo-font";
-import { Slot, SplashScreen, Stack, useRouter } from "expo-router";
+import { Slot, SplashScreen } from "expo-router";
 import { useEffect } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { View } from "react-native";
 
+// Prevent the splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
 
-const InitialLayout = () => {
+export default function RootLayout() {
 	const [loaded, error] = useFonts({
 		SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
 	});
-	const router = useRouter();
 
 	useEffect(() => {
 		if (error) throw error;
@@ -22,28 +22,8 @@ const InitialLayout = () => {
 	}, [loaded]);
 
 	if (!loaded) {
-		return <Slot />;
+		return <View />;
 	}
 
-	return (
-		<Stack>
-			<Stack.Screen
-				name="index"
-				options={{
-					headerShown: false,
-				}}
-			/>
-			<Stack.Screen name="(auth)" options={{ headerShown: false }} />
-		</Stack>
-	);
-};
-
-const RootLayoutNav = () => {
-	return (
-		<GestureHandlerRootView style={{ flex: 1 }}>
-			<InitialLayout />
-		</GestureHandlerRootView>
-	);
-};
-
-export default RootLayoutNav;
+	return <Slot />;
+}
