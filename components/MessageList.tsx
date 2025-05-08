@@ -9,7 +9,7 @@ import {
 	TouchableOpacity,
 	Linking,
 } from "react-native";
-import { Message, Role, Source } from "@/utils/Interfaces";
+import { Message, Role } from "@/utils/Interfaces";
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import Markdown from "react-native-markdown-display";
@@ -23,7 +23,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ item, isBot }) => {
 	const [showSources, setShowSources] = useState(false);
 
 	const toggleSources = () => {
-		if (item.sources && item.sources.length > 0) {
+		if (item.source && item.source.length > 0) {
 			setShowSources(!showSources);
 		}
 	};
@@ -63,7 +63,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ item, isBot }) => {
 						</Text>
 					</View>
 				)}
-				{isBot && item.sources && item.sources.length > 0 && (
+				{isBot && item.source && item.source.length > 0 && (
 					<TouchableOpacity
 						onPress={toggleSources}
 						style={styles.sourcesToggleButton}
@@ -79,33 +79,19 @@ const MessageItem: React.FC<MessageItemProps> = ({ item, isBot }) => {
 						/>
 					</TouchableOpacity>
 				)}
-				{isBot && showSources && item.sources && item.sources.length > 0 && (
+				{isBot && showSources && item.source && item.source.length > 0 && (
 					<View style={styles.sourcesContainer}>
-						{item.sources.map((source, index) => (
-							<TouchableOpacity
-								key={index}
-								style={styles.sourceItem}
-								onPress={() => handleLinkPress(source.url)}
-								activeOpacity={0.7}
-							>
-								<View style={styles.sourceContent}>
-									<Ionicons
-										name="link-outline"
-										size={16}
-										color={Colors.primary}
-										style={styles.sourceIcon}
-									/>
-									<Text style={styles.sourceTitle}>{source.title}</Text>
-								</View>
-								<Text
-									style={styles.sourceUrl}
-									numberOfLines={1}
-									ellipsizeMode="tail"
-								>
-									{source.url}
-								</Text>
-							</TouchableOpacity>
-						))}
+						<TouchableOpacity style={styles.sourceItem} activeOpacity={0.7}>
+							<View style={styles.sourceContent}>
+								<Ionicons
+									name="link-outline"
+									size={16}
+									color={Colors.primary}
+									style={styles.sourceIcon}
+								/>
+								<Text style={styles.sourceTitle}>{item.source}</Text>
+							</View>
+						</TouchableOpacity>
 					</View>
 				)}
 			</View>
@@ -483,7 +469,6 @@ const styles = StyleSheet.create({
 		maxWidth: "75%",
 	},
 	messageBubble: {
-		maxWidth: "75%",
 		borderRadius: 18,
 		paddingHorizontal: 16,
 		paddingVertical: 10,

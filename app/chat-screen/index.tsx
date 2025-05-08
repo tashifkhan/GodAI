@@ -6,7 +6,7 @@ import ChatHeader from "@/components/ChatHeader";
 import MessageList from "@/components/MessageList";
 import ChatInput from "@/components/ChatInput";
 import FAQSection from "@/components/FAQSection";
-import { Message, Role, Source } from "@/utils/Interfaces";
+import { Message, Role } from "@/utils/Interfaces";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ChatScreen() {
@@ -15,10 +15,7 @@ export default function ChatScreen() {
 		{
 			role: Role.Bot,
 			content: "I am GOD AI. How may I assist you today?",
-			sources: [
-				{ title: "Official Documentation", url: "https://example.com/docs" },
-				{ title: "Related Article", url: "https://example.com/article" },
-			],
+			timestamp: new Date(),
 		},
 	]);
 	const [isTyping, setIsTyping] = useState(false);
@@ -40,16 +37,7 @@ The path to understanding often begins with a simple question. Your query about 
 > "The universe doesn't withhold its secrets; it simply waits for the right questions."
 
 Would you like to explore this topic further?`,
-				sources: [
-					{
-						title: "Deep Dive: Interconnections",
-						url: "https://example.com/interconnections",
-					},
-					{
-						title: "The Nature of Truth",
-						url: "https://example.com/truth-layers",
-					},
-				],
+				source: "hihello",
 			},
 			{
 				content: `# On ${userMessage}
@@ -130,7 +118,6 @@ Would you like to discuss any of these points in more detail?`,
 				role: Role.Bot,
 				content: botResponseData.content,
 				timestamp: new Date(),
-				sources: botResponseData.sources,
 			};
 
 			setMessages((prev) => [...prev, botMessage]);
