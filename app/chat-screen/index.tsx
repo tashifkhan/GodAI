@@ -68,7 +68,13 @@ export default function ChatScreen() {
 				use_history: isHistoryEnabled ? 1 : 0,
 			};
 
-			const response = await fetch("http://localhost:8000/plain-rag-query", {
+			// Determine the base URL based on platform
+			const baseUrl =
+				Platform.OS === "web"
+					? "http://127.0.0.1:8000/api/plain-rag-query"
+					: "http://10.0.2.2:8000/api/plain-rag-query";
+
+			const response = await fetch(baseUrl, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

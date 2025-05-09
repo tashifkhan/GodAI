@@ -59,7 +59,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ item, isBot }) => {
 				style={isBot ? styles.botContentContainer : styles.userContentContainer}
 			>
 				{isBot ? (
-					<Markdown style={markdownStyles}>{item.content}</Markdown>
+					<Markdown style={markdownStyles}>{item.content || ""}</Markdown>
 				) : (
 					<View style={[styles.messageBubble, styles.userBubble]}>
 						<Text style={[styles.messageText, styles.userMessageText]}>
@@ -88,7 +88,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ item, isBot }) => {
 						<TouchableOpacity style={styles.sourceItem} activeOpacity={0.7}>
 							<View style={styles.sourceContent}>
 								<Ionicons
-									name="link-outline"
+									name="document-text-outline"
 									size={16}
 									color={Colors.primary}
 									style={styles.sourceIcon}
