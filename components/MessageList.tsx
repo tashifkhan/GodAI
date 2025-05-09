@@ -8,6 +8,7 @@ import {
 	Easing,
 	TouchableOpacity,
 	Linking,
+	Image,
 } from "react-native";
 import { Message, Role } from "@/utils/Interfaces";
 import Colors from "@/constants/Colors";
@@ -47,7 +48,10 @@ const MessageItem: React.FC<MessageItemProps> = ({ item, isBot }) => {
 		>
 			{isBot && (
 				<View style={styles.avatarContainer}>
-					<Text style={styles.avatarText}>GOD</Text>
+					<Image
+						source={require("@/assets/images/icon.png")}
+						style={styles.avatarImage}
+					/>
 				</View>
 			)}
 
@@ -312,7 +316,10 @@ const MessageList = ({ messages, isTyping = false }: MessageListProps) => {
 		return (
 			<View style={styles.typingContainer}>
 				<View style={styles.avatarContainer}>
-					<Text style={styles.avatarText}>GOD</Text>
+					<Image
+						source={require("@/assets/images/icon.png")}
+						style={styles.avatarImage}
+					/>
 				</View>
 				<View style={styles.typingBubble}>
 					<View style={styles.typingAnimation}>
@@ -455,11 +462,16 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		marginRight: 8,
+		overflow: "hidden",
 	},
 	avatarText: {
 		color: Colors.light,
 		fontWeight: "700",
 		fontSize: 12,
+	},
+	avatarImage: {
+		width: "100%",
+		height: "100%",
 	},
 	botContentContainer: {
 		maxWidth: "80%",

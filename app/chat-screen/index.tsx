@@ -95,9 +95,9 @@ export default function ChatScreen() {
 
 			const botMessage: Message = {
 				role: Role.Bot,
-				content: responseData.message,
+				content: responseData.answer,
 				timestamp: new Date(),
-				source: responseData.context, // Assuming context is a string
+				source: responseData.context_used,
 			};
 			setMessages((prev) => [...prev, botMessage]);
 		} catch (error) {
